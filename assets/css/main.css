@@ -1270,6 +1270,12 @@ section,
 /*--------------------------------------------------------------
 # Starter Section Section
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+
+.social-links img {
+  margin: 0 8px;
+  transition: 0.3s;
+}
+
+.social-links img:hover {
+  transform: scale(1.2);
 }
