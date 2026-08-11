@@ -64,11 +64,22 @@
     })
     .then(data => {
       thisForm.querySelector('.loading').classList.remove('d-block');
-      if (data.trim() == 'OK') {
+
+      let success = data.trim() == 'OK';
+      let message = data;
+      try {
+        let json = JSON.parse(data);
+        success = json.success === true;
+        message = json.message;
+      } catch (e) {
+        // not JSON, fall back to the plain "OK" check above
+      }
+
+      if (success) {
         thisForm.querySelector('.sent-message').classList.add('d-block');
-        thisForm.reset(); 
+        thisForm.reset();
       } else {
-        throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
+        throw new Error(message ? message : 'Form submission failed and no error message returned from: ' + action);
       }
     })
     .catch((error) => {
